@@ -1,48 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Game Đoán Số</title>
+    <meta charset="UTF-8">
+    <title>Oẳn Tù Tì</title>
+
     <style>
         body{
             text-align:center;
             font-family:Arial;
-            margin-top:100px;
+            margin-top:50px;
+            background:#f0f0f0;
         }
-        input{
-            padding:10px;
-        }
+
         button{
-            padding:10px 20px;
+            font-size:20px;
+            padding:15px 25px;
+            margin:10px;
+            cursor:pointer;
+        }
+
+        #result{
+            font-size:24px;
+            margin-top:20px;
+            font-weight:bold;
         }
     </style>
 </head>
+
 <body>
 
-<h1>🎮 Game Đoán Số</h1>
+<h1>🎮 Game Oẳn Tù Tì</h1>
 
-<p>Máy đã chọn số từ 1 đến 100</p>
+<button onclick="play('keo')">✌️ Kéo</button>
+<button onclick="play('bua')">👊 Búa</button>
+<button onclick="play('bao')">✋ Bao</button>
 
-<input type="number" id="guess">
-<button onclick="check()">Đoán</button>
+<h2 id="player"></h2>
+<h2 id="computer"></h2>
 
-<p id="result"></p>
+<div id="result"></div>
 
 <script>
-let secret = Math.floor(Math.random()*100)+1;
 
-function check(){
-    let guess = Number(document.getElementById("guess").value);
+function play(player){
 
-    if(guess > secret){
-        document.getElementById("result").innerHTML = "📉 Quá lớn!";
+    const choices = ["keo","bua","bao"];
+    const computer = choices[Math.floor(Math.random()*3)];
+
+    document.getElementById("player").innerHTML =
+        "Bạn chọn: " + player;
+
+    document.getElementById("computer").innerHTML =
+        "Máy chọn: " + computer;
+
+    let result="";
+
+    if(player===computer){
+        result="🤝 Hòa!";
     }
-    else if(guess < secret){
-        document.getElementById("result").innerHTML = "📈 Quá nhỏ!";
+    else if(
+        (player==="keo" && computer==="bao") ||
+        (player==="bua" && computer==="keo") ||
+        (player==="bao" && computer==="bua")
+    ){
+        result="🎉 Bạn thắng!";
     }
     else{
-        document.getElementById("result").innerHTML = "🎉 Chính xác!";
+        result="😢 Máy thắng!";
     }
+
+    document.getElementById("result").innerHTML=result;
 }
+
 </script>
 
 </body>
