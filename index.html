@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Website của Minh</title>
+    <title>Game Đoán Số</title>
+    <style>
+        body{
+            text-align:center;
+            font-family:Arial;
+            margin-top:100px;
+        }
+        input{
+            padding:10px;
+        }
+        button{
+            padding:10px 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Xin chào!</h1>
-    <p>Đây là website đầu tiên của tôi.</p>
+
+<h1>🎮 Game Đoán Số</h1>
+
+<p>Máy đã chọn số từ 1 đến 100</p>
+
+<input type="number" id="guess">
+<button onclick="check()">Đoán</button>
+
+<p id="result"></p>
+
+<script>
+let secret = Math.floor(Math.random()*100)+1;
+
+function check(){
+    let guess = Number(document.getElementById("guess").value);
+
+    if(guess > secret){
+        document.getElementById("result").innerHTML = "📉 Quá lớn!";
+    }
+    else if(guess < secret){
+        document.getElementById("result").innerHTML = "📈 Quá nhỏ!";
+    }
+    else{
+        document.getElementById("result").innerHTML = "🎉 Chính xác!";
+    }
+}
+</script>
+
 </body>
 </html>
